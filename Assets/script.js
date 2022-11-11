@@ -16,14 +16,10 @@ function generatePassword() {
   } 
   console.log(chooseLength);
 
-  uppercase = confirm("Should your password contain uppercase letters?");
-  console.log(uppercase);
-  lowercase = confirm("Should your password contain lowercase letters?");
-  console.log(lowercase);
-  special = confirm("Should your password contain special characters?");
-  console.log(special);
-  number = confirm("Should your password contain numbers?");
-  console.log(number);
+  var uppercaseConfirm = confirm("Should your password contain uppercase letters?");
+  var lowercaseConfirm = confirm("Should your password contain lowercase letters?");
+  var specialConfirm = confirm("Should your password contain special characters?");
+  var numberConfirm = confirm("Should your password contain numbers?");
 
  if (!uppercase && !lowercase && !special && !number){
   alert("At least one type of character must be selected. Please try again");
@@ -31,60 +27,45 @@ function generatePassword() {
 
  var options = []
 
- if (uppercase == true) {  
-  options.push(uppercase) 
-  console.log("hit")
+ if (uppercaseConfirm == true) {  
+  options = options.concat(uppercase) 
  }
 
- if (lowercase == true) {
-  options.push(lowercase)
+ if (lowercaseConfirm == true) {
+  options = options.concat(lowercase)
  }
 
- if (special == true) {
-  options.push(special)
+ if (specialConfirm == true) {
+  options = options.concat(special)
  }
 
- if (number == true) {
-  options.push(number)
+ if (numberConfirm == true) {
+  options = options.concat(number)
  }
  
  console.log(options)
 
- var generatedPW = ""
+ var generatedPW = []
 
  for (var i = 0; i < chooseLengthNumber; i++) {
-
+  x = Math.floor(Math.random() * options.length);
+  // options[x]
+  generatedPW = generatedPW + options[x]
  }
-
-//  if uppercase === true, those array values are added to the random mix
-// if (uppercase === true) {
-
-}
-
-
-// FOR loop to generate requested length of pw then 
-// eventually the return is that randomized output and not "password"
-  // return "password";
+ console.log(generatedPW)
+ return generatedPW;
+};
 
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
+  console.log(password)
 
   passwordText.value = password;
-
-}
+console.log(passwordText)
+};
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// button clickable 
-// button clicks & promps pop up w critera
-// criteria options:
-//    8-128 char, 
-//    special characters y/n
-//    uppercase y/n
-//    number y/n
-// inputs validated & password generated following the rules
-// password is displayed
